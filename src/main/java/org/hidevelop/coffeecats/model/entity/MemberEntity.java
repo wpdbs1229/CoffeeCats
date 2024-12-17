@@ -1,9 +1,9 @@
-package org.hidevelop.coffeecats.model;
+package org.hidevelop.coffeecats.model.entity;
 
 import jakarta.persistence.*;
 
 @Entity
-public class Member extends BaseEntity{
+public class MemberEntity extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

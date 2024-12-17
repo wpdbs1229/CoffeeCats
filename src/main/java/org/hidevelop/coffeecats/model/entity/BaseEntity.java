@@ -1,4 +1,4 @@
-package org.hidevelop.coffeecats.model;
+package org.hidevelop.coffeecats.model.entity;
 
 
 import jakarta.persistence.Column;
