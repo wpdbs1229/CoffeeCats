@@ -1,6 +1,7 @@
 package org.hidevelop.coffeecats.config;
 
-import org.hidevelop.coffeecats.model.entity.PasswordEntity;
+import org.hidevelop.coffeecats.model.entity.MemberEntity;
+import org.hidevelop.coffeecats.model.entity.Password;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +26,7 @@ public class PasswordEncoder {
     public PasswordEncoder(
             @Value("${password.encode.algorithm}") String encodeAlgorithm,
             @Value("${password.encode.saltAlgorithm}") String saltAlgorithm,
-            @Value("${password.encode.iteration}") int iterations,
+            @Value("${password.encode.iterations}") int iterations,
             @Value("${password.encode.keyLength}") int keyLength
     ){
         this.encodeAlgorithm = encodeAlgorithm;
@@ -34,7 +35,7 @@ public class PasswordEncoder {
         this.saltAlgorithm = saltAlgorithm;
     }
 
-    public PasswordEntity encrypt(String email, String password) {
+    public Password encrypt(String email, String password) {
 
         try {
             byte[] salt = getSalt(email);
@@ -43,7 +44,7 @@ public class PasswordEncoder {
 
             byte[] hash = factory.generateSecret(spec).getEncoded();
             String encodedPassword =  Base64.getEncoder().encodeToString(hash);
-            return PasswordEntity.of(encodedPassword, salt);
+            return Password.of(encodedPassword, salt);
 
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException | InvalidKeySpecException e) {
             throw new RuntimeException(e);
@@ -59,5 +60,13 @@ public class PasswordEncoder {
 
         //saltAlgorithm 사용하여 해시, 결과를 바이드로 반환
         return  messageDigest.digest(keyBytes);
+    }
+
+    public boolean check(MemberEntity memberEntity, String inputPassword) {
+
+        Password password = memberEntity.getPassword();
+        Password encryptPassword = encrypt(memberEntity.getEmail(), inputPassword);
+
+        return password.getPassword().equals(encryptPassword.getPassword());
     }
 }

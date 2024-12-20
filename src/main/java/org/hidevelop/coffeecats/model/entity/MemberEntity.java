@@ -1,13 +1,16 @@
 package org.hidevelop.coffeecats.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hidevelop.coffeecats.model.dto.SignUpReqDto;
 
 @Entity
 @Table(name = "member")
+@Builder
+@Getter
+@AllArgsConstructor
 @NoArgsConstructor (access = AccessLevel.PROTECTED)
-@SecondaryTable(name = "memeber_password", pkJoinColumns = @PrimaryKeyJoinColumn(name = "member_id"))
+@SecondaryTable(name = "member_password", pkJoinColumns = @PrimaryKeyJoinColumn(name = "member_id"))
 public class MemberEntity extends BaseEntity{
 
     @Id
@@ -21,6 +24,15 @@ public class MemberEntity extends BaseEntity{
     private String nickname;
 
     @Column(nullable = false)
-    private PasswordEntity password;
+    private Password password;
+
+
+    public static MemberEntity of(SignUpReqDto signUpReqDto, Password password){
+        return MemberEntity.builder()
+                .email(signUpReqDto.email())
+                .nickname(signUpReqDto.nickname())
+                .password(password)
+                .build();
+    }
 
 }

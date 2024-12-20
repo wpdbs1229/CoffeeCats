@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class PasswordEntity {
+public class Password {
 
     @Column(table = "member_password")
     private String password;
@@ -19,7 +19,7 @@ public class PasswordEntity {
     @Column(columnDefinition = "BINARY(16)", table = "member_password")
     private byte[] salt;
 
-    public static PasswordEntity of(String password, byte[] salt) {
-        return new PasswordEntity(password, salt);
+    public static Password of(String password, byte[] salt) {
+        return new Password(password, salt);
     }
 }
