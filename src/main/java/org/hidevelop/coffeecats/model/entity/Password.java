@@ -16,7 +16,7 @@ public class Password {
     @Column(table = "member_password")
     private String password;
 
-    @Column(columnDefinition = "BINARY(16)", table = "member_password")
+    @Column(columnDefinition = "BINARY(32)", table = "member_password")
     private byte[] salt;
 
     public static Password of(String password, byte[] salt) {
