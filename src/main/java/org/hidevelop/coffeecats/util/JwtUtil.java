@@ -3,14 +3,12 @@ package org.hidevelop.coffeecats.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.hidevelop.coffeecats.exception.CustomException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-import static org.hidevelop.coffeecats.exception.error.impl.AuthenticationError.EXPIRED_TOKEN;
-import static org.hidevelop.coffeecats.exception.error.impl.AuthenticationError.NOT_VALID_TOKEN;
-
+@Component
 public class JwtUtil {
 
     private final String SECRET_KET;
@@ -41,8 +39,12 @@ public class JwtUtil {
         return getClaims(token).getSubject();
     }
 
-    public String extractMemberId(String token) {
-        return getClaims(token).get("memberId", Long.class).toString();
+    public Long extractMemberId(String token) {
+        return getClaims(token).get("memberId", Long.class);
+    }
+
+    public Date extractExpiration(String token) {
+        return getClaims(token).getExpiration();
     }
 
     public boolean validateToken(String token) {
