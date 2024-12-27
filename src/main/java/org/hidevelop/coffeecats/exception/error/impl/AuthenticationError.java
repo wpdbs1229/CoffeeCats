@@ -6,9 +6,10 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public enum AuthenticationError implements CustomError {
-
+    // 에러메시지는 불친절해야해여
     NOT_VALID_TOKEN(HttpStatus.UNAUTHORIZED, "잘못된 접근입니다."),
-    EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED, "잘못된 접근입니다.")
+    EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED, "잘못된 접근입니다."),
+    PASSWORD_NOT_MATCH(HttpStatus.UNAUTHORIZED,"잘못된 접근입니다.")
     ;
 
     private final HttpStatus httpStatus;
