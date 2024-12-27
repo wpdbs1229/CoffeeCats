@@ -3,7 +3,6 @@ package org.hidevelop.coffeecats.service;
 import lombok.RequiredArgsConstructor;
 import org.hidevelop.coffeecats.config.PasswordEncoder;
 import org.hidevelop.coffeecats.exception.CustomException;
-import org.hidevelop.coffeecats.exception.error.impl.MemberCustomError;
 import org.hidevelop.coffeecats.model.dto.SignUpReqDto;
 import org.hidevelop.coffeecats.model.dto.SignUpResDto;
 import org.hidevelop.coffeecats.model.entity.MemberEntity;
