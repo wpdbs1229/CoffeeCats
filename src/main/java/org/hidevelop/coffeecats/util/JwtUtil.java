@@ -3,11 +3,13 @@ package org.hidevelop.coffeecats.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.hidevelop.coffeecats.exception.CustomException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+import static org.hidevelop.coffeecats.exception.error.impl.AuthenticationError.*;
 @Component
 public class JwtUtil {
 
@@ -47,21 +49,16 @@ public class JwtUtil {
         return getClaims(token).getExpiration();
     }
 
-    public boolean validateToken(String token) {
-        try {
-            Date expiration = getClaims(token).getExpiration();
-            return expiration.before(new Date());
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
     private Claims getClaims(String token) {
+        try{
+            return Jwts.parser()
+                    .setSigningKey(SECRET_KET)
+                    .parseClaimsJws(token)
+                    .getBody();
 
-        return Jwts.parser()
-                .setSigningKey(SECRET_KET)
-                .parseClaimsJws(token)
-                .getBody();
+        } catch (Exception e) {
+            throw new CustomException(NOT_VALID_TOKEN);
+        }
 
     }
 
