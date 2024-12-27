@@ -28,7 +28,7 @@ class MemberServiceTest {
     @Mock // 가짜 객체를 만들어 @InjectMocks 대상에 주입
     private MemberRepository memberRepository;
 
-    @Mock // 진짜 객체를 만들어 @InjectMocks 대상에 주입
+    @Mock
     private PasswordEncoder passwordEncoder;
 
     @Test
@@ -58,7 +58,6 @@ class MemberServiceTest {
         SignUpResDto signUpResDto = memberService.signUp(signUpReqDto);
 
         assertThat(signUpResDto.email()).isEqualTo("test@email.com");
-
     }
 
     @Test

@@ -3,7 +3,6 @@ package org.hidevelop.coffeecats.service;
 import lombok.RequiredArgsConstructor;
 import org.hidevelop.coffeecats.config.PasswordEncoder;
 import org.hidevelop.coffeecats.exception.CustomException;
-import org.hidevelop.coffeecats.exception.error.impl.MemberCustomError;
 import org.hidevelop.coffeecats.model.dto.SignUpReqDto;
 import org.hidevelop.coffeecats.model.dto.SignUpResDto;
 import org.hidevelop.coffeecats.model.entity.MemberEntity;
@@ -12,6 +11,8 @@ import org.hidevelop.coffeecats.repository.MemberRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import static org.hidevelop.coffeecats.exception.error.impl.MemberCustomError.MEMBER_ALREADY_EXISTS;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +29,7 @@ public class MemberService {
         boolean exists = memberRepository.existsByEmail(signUpReqDto.email());
 
         if (exists) {
-            throw new CustomException(MemberCustomError.MEMBER_ALREADY_EXISTS);
+            throw new CustomException(MEMBER_ALREADY_EXISTS);
         }
 
         Password password = passwordEncoder.encrypt(signUpReqDto.email(), signUpReqDto.password());

@@ -7,7 +7,8 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum MemberCustomError implements CustomError {
 
-    MEMBER_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "Member already exists"),
+    MEMBER_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "이미 회원가입된 회원입니다."),
+    MEMBER_NOT_FOUND(HttpStatus.BAD_REQUEST, "회원가입을 진행해주세요"),
     ;
 
     private final HttpStatus httpStatus;
