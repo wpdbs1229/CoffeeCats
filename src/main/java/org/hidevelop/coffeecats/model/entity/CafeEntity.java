@@ -3,7 +3,6 @@ package org.hidevelop.coffeecats.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
-
 import java.util.UUID;
 
 @Entity
@@ -12,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class CafeEntity {
+public class CafeEntity extends BaseEntity {
 
     @Id
     private UUID cafeId;
@@ -37,5 +36,6 @@ public class CafeEntity {
     @Column(nullable = false)
     private String geoHash;
 
-
+    @Comment("카페를 등록한 유저")
+    private Long registerMember;
 }
