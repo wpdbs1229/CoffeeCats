@@ -2,6 +2,7 @@ package org.hidevelop.coffeecats.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hidevelop.coffeecats.model.type.CafeType;
 
 @Entity
 @Table(name = "cafe_type")
@@ -16,5 +17,6 @@ public class CafeTypeEntity {
     private Long cafeTypeId;
 
     @Column(unique = true, nullable = false)
-    private String cafeTypeName;
+    @Enumerated(EnumType.STRING)
+    private CafeType cafeType;
 }
