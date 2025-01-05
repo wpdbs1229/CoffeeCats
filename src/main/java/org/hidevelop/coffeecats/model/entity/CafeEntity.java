@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "cafe")
 @Builder
@@ -13,8 +15,7 @@ import org.hibernate.annotations.Comment;
 public class CafeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cafeId;
+    private UUID cafeId;
 
     @Column(nullable = false)
     private String cafeName;
@@ -31,5 +32,10 @@ public class CafeEntity {
     @Comment("카페 경도")
     @Column(nullable = false)
     private double longitude;
+
+    @Comment("위도, 경도 해싱")
+    @Column(nullable = false)
+    private String geoHash;
+
 
 }
