@@ -6,14 +6,14 @@ import lombok.*;
 import java.util.List;
 
 @Getter
-public class GooglePlaceRequestDto {
+public class GooglePlaceSearchNearByRequestDto {
 
     private final List<String> includedTypes;
     private final int maxResultCount;
     private final String languageCode;
     private final LocationRestriction locationRestriction;
 
-    public GooglePlaceRequestDto(LocationRestriction locationRestriction) {
+    public GooglePlaceSearchNearByRequestDto(LocationRestriction locationRestriction) {
         this.includedTypes = List.of("cafe", "coffee_shop");
         this.maxResultCount = 20;
         this.languageCode = "ko";

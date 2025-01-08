@@ -5,14 +5,12 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.hidevelop.coffeecats.annotation.JwtAuth;
 import org.hidevelop.coffeecats.client.GooglePlaceClient;
-import org.hidevelop.coffeecats.model.dto.GooglePlaceRequestDto;
+import org.hidevelop.coffeecats.model.dto.GooglePlaceSearchNearByRequestDto;
 import org.hidevelop.coffeecats.model.dto.GooglePlaceResponseDto;
 import org.hidevelop.coffeecats.model.dto.RegisterCafeReqDto;
 import org.hidevelop.coffeecats.service.CafeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,18 +36,18 @@ public class CafeController {
     public ResponseEntity<GooglePlaceResponseDto> searchRegisterCafe(@RequestParam double longitude,
                                                                      @RequestParam double latitude) {
 
-        GooglePlaceRequestDto googlePlaceRequestDto =
-                new GooglePlaceRequestDto(
-                        new GooglePlaceRequestDto.LocationRestriction(
-                                new GooglePlaceRequestDto.Circle(
-                                        new GooglePlaceRequestDto.Center(
+        GooglePlaceSearchNearByRequestDto googlePlaceSearchNearByRequestDto =
+                new GooglePlaceSearchNearByRequestDto(
+                        new GooglePlaceSearchNearByRequestDto.LocationRestriction(
+                                new GooglePlaceSearchNearByRequestDto.Circle(
+                                        new GooglePlaceSearchNearByRequestDto.Center(
                                                 latitude,
                                                 longitude
                                         )
                                 )
                         )
                 );
-        GooglePlaceResponseDto googlePlaceResponseDtos = googlePlaceClient.searchNearby(googlePlaceRequestDto);
+        GooglePlaceResponseDto googlePlaceResponseDtos = googlePlaceClient.searchNearby(googlePlaceSearchNearByRequestDto);
         return ResponseEntity.ok(googlePlaceResponseDtos);
     }
 
