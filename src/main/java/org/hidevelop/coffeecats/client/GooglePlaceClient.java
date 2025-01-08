@@ -1,14 +1,12 @@
 package org.hidevelop.coffeecats.client;
 
-import feign.Headers;
-import feign.Param;
 import org.hidevelop.coffeecats.config.GooglePlaceFeignConfig;
 import org.hidevelop.coffeecats.model.dto.GooglePlaceRequestDto;
 import org.hidevelop.coffeecats.model.dto.GooglePlaceResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
+
 
 @FeignClient(name = "google-place-client",
         url = "https://places.googleapis.com/v1/",
