@@ -5,8 +5,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.hidevelop.coffeecats.annotation.JwtAuth;
 import org.hidevelop.coffeecats.client.GooglePlaceClient;
-import org.hidevelop.coffeecats.model.dto.GooglePlaceSearchNearByRequestDto;
-import org.hidevelop.coffeecats.model.dto.GooglePlaceResponseDto;
+import org.hidevelop.coffeecats.model.dto.google_map.*;
 import org.hidevelop.coffeecats.model.dto.RegisterCafeReqDto;
 import org.hidevelop.coffeecats.service.CafeService;
 import org.springframework.http.ResponseEntity;
@@ -32,23 +31,44 @@ public class CafeController {
     }
 
     @JwtAuth
-    @GetMapping("/search/register-cafe")
+    @GetMapping("/search-nearby/register-cafe")
     public ResponseEntity<GooglePlaceResponseDto> searchRegisterCafe(@RequestParam double longitude,
                                                                      @RequestParam double latitude) {
 
-        GooglePlaceSearchNearByRequestDto googlePlaceSearchNearByRequestDto =
-                new GooglePlaceSearchNearByRequestDto(
-                        new GooglePlaceSearchNearByRequestDto.LocationRestriction(
-                                new GooglePlaceSearchNearByRequestDto.Circle(
-                                        new GooglePlaceSearchNearByRequestDto.Center(
-                                                latitude,
-                                                longitude
-                                        )
+        GooglePlaceSearchNearByRequestDto googlePlaceSearchNearByRequestDto = new GooglePlaceSearchNearByRequestDto(
+                new GooglePlaceSearchNearByRequestDto.LocationRestriction(
+                        new Circle(
+                                new Center(
+                                        latitude,
+                                        longitude
                                 )
                         )
-                );
+                )
+        );
         GooglePlaceResponseDto googlePlaceResponseDtos = googlePlaceClient.searchNearby(googlePlaceSearchNearByRequestDto);
         return ResponseEntity.ok(googlePlaceResponseDtos);
     }
 
+    @JwtAuth
+    @GetMapping("/search-text/register-cafe")
+    public ResponseEntity<?> searchRegisterCafe(@RequestParam String textQuery,
+                                                @RequestParam double longitude,
+                                                @RequestParam double latitude) {
+        GooglePlaceSearchTextReqDto googlePlaceSearchTextReqDto = new GooglePlaceSearchTextReqDto(
+                textQuery,
+                new GooglePlaceSearchTextReqDto.LocationBias(
+                        new Circle(
+                                new Center(
+                                        latitude,
+                                        longitude
+                                )
+                        )
+                )
+        );
+        GooglePlaceResponseDto googlePlaceResponseDto = googlePlaceClient.searchText(googlePlaceSearchTextReqDto);
+        if (googlePlaceResponseDto.places() == null) {
+            return ResponseEntity.ok("검색결과가 없습니다.");
+        }
+        return ResponseEntity.ok(googlePlaceResponseDto);
+    }
 }
