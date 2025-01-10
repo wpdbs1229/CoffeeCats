@@ -1,4 +1,4 @@
-package org.hidevelop.coffeecats.model.dto;
+package org.hidevelop.coffeecats.model.dto.google_map;
 
 import java.util.List;
 

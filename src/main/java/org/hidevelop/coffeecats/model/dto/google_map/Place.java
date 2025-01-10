@@ -1,4 +1,4 @@
-package org.hidevelop.coffeecats.model.dto;
+package org.hidevelop.coffeecats.model.dto.google_map;
 
 public record Place(
         String name,
