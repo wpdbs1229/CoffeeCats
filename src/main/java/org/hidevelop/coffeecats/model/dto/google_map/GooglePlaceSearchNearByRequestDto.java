@@ -1,4 +1,4 @@
-package org.hidevelop.coffeecats.model.dto;
+package org.hidevelop.coffeecats.model.dto.google_map;
 
 
 import lombok.*;
@@ -29,25 +29,7 @@ public class GooglePlaceSearchNearByRequestDto {
         }
     }
 
-    @Getter
-    public static class Circle {
-        private final Center center;
-        private final double radius;
 
-        public Circle(Center center) {
-            this.center = center;
-            this.radius = 500.0;
-        }
-    }
 
-    @Getter
-    public static class Center {
-        private final Double latitude;
-        private final Double longitude;
 
-        public Center(Double latitude, Double longitude) {
-            this.latitude = latitude;
-            this.longitude = longitude;
-        }
-    }
 }
