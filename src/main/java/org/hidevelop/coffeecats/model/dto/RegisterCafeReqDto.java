@@ -24,7 +24,7 @@ public record RegisterCafeReqDto(
 ) {
     public CafeEntity toCafeEntity(String geoHash, double latitude, double longitude, Long registerMemberId) {
         return CafeEntity.builder()
-                .cafeId(this.cafeId)
+                .cafeId(subPlaceString(this.cafeId))
                 .cafeName(this.cafeName)
                 .cafeDescription(this.cafeDescription)
                 .address(this.address)
@@ -33,7 +33,10 @@ public record RegisterCafeReqDto(
                 .geoHash(geoHash)
                 .registerMember(registerMemberId)
                 .build();
+    }
 
+    private String subPlaceString(String cafeId){
+        return cafeId.substring(7);
     }
 
 
