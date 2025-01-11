@@ -1,0 +1,14 @@
+package org.hidevelop.coffeecats.model.entity.id;
+
+
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+
+@NoArgsConstructor
+@EqualsAndHashCode
+public class TypeReviewsMapId implements Serializable {
+    private Long cafeTypeEntity;
+    private Long memberCafeTypeReviewsEntity;
+}

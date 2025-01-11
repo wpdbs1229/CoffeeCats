@@ -60,12 +60,12 @@ public class CafeService {
 
     private void validateCafeRegistration(RegisterCafeReqDto registerCafeReqDto) {
 
-        boolean existsById = cafeRepository.existsById(registerCafeReqDto.generateCafeUuid());
+        boolean existsById = cafeRepository.existsById(registerCafeReqDto.cafeId());
         if (existsById) {
             throw new CustomException(ALREADY_REGISTERED);
         }
 
-        boolean existsByLoadAddress = cafeRepository.existsByLoadAddress(registerCafeReqDto.loadAddress());
+        boolean existsByLoadAddress = cafeRepository.existsByAddress(registerCafeReqDto.address());
         if(existsByLoadAddress) {
             throw new CustomException(ALREADY_REGISTERED);
         }

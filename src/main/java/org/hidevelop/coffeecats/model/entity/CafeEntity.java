@@ -14,7 +14,7 @@ import java.util.UUID;
 public class CafeEntity extends BaseEntity {
 
     @Id
-    private UUID cafeId;
+    private String cafeId;
 
     @Column(nullable = false)
     private String cafeName;
@@ -22,7 +22,7 @@ public class CafeEntity extends BaseEntity {
     private String cafeDescription;
 
     @Column(nullable = false, unique = true)
-    private String loadAddress;
+    private String address;
 
     @Comment("카페 위도")
     @Column(nullable = false)
