@@ -9,6 +9,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class TypeReviewsMapId implements Serializable {
-    private Long cafeTypeEntityId;
-    private Long memberCafeTypeReviewsEntityId;
+    private Long cafeTypeEntity;
+    private Long memberCafeTypeReviewsEntity;
 }

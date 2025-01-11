@@ -13,7 +13,7 @@ import org.hidevelop.coffeecats.model.entity.id.TypeReviewsMapId;
 @NoArgsConstructor
 @Builder
 @Getter
-public class TypeReviewsMap {
+public class TypeReviewsMapEntity {
 
     @Id
     @ManyToOne
@@ -23,5 +23,5 @@ public class TypeReviewsMap {
     @Id
     @ManyToOne
     @JoinColumn(name = "member_cafe_type_reviews_id", nullable = false)
-    private MemberCafeTypeReviews memberCafeTypeReviews;
+    private MemberCafeTypeReviewsEntity memberCafeTypeReviewsEntity;
 }

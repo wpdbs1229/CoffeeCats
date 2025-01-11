@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class MemberCafeTypeReviews {
+public class MemberCafeTypeReviewsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

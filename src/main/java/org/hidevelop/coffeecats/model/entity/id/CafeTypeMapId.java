@@ -8,6 +8,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class CafeTypeMapId implements Serializable {
-    private String cafeEntityId;
-    private Long cafeTypeEntityId;
+    private String cafeEntity;
+    private Long cafeTypeEntity;
 }

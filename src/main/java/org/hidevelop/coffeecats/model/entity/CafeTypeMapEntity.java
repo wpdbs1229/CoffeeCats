@@ -15,19 +15,19 @@ public class CafeTypeMapEntity extends BaseEntity {
     @Id
     @ManyToOne
     @JoinColumn(name = "cafe_id", nullable = false)
-    private CafeEntity cafe;
+    private CafeEntity cafeEntity;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "cafe_type_id", nullable = false)
-    private CafeTypeEntity cafeType;
+    private CafeTypeEntity cafeTypeEntity;
 
     @Comment("해당 태그가 리뷰된 수")
     private int typeReviewCount;
 
     public CafeTypeMapEntity(CafeEntity cafeEntity, CafeTypeEntity cafeTypeEntity) {
-        this.cafe = cafeEntity;
-        this.cafeType = cafeTypeEntity;
+        this.cafeEntity = cafeEntity;
+        this.cafeTypeEntity = cafeTypeEntity;
         this.typeReviewCount = 1;
     }
 
