@@ -10,21 +10,22 @@ import org.hidevelop.coffeecats.model.validator.constraint.ValidLongitude;
 import java.util.List;
 
 public record RegisterCafeReqDto(
+        @NotBlank(message = "카페 ID값은 필수 입니다. (구글 Places ID)")
         String cafeId,
-        @NotBlank(message = "카폐이름은 필수 값 입니다.")
+        @NotBlank(message = "카폐 이름은 필수 값 입니다.")
         String cafeName,
         String cafeDescription,
         @NotBlank(message = "카폐주소는 필수 값 입니다.")
         String address,
         List<CafeType> cafeType,
         @ValidLatitude
-        String latitude,
+        double latitude,
         @ValidLongitude
-        String longitude
+        double longitude
 ) {
-    public CafeEntity toCafeEntity(String geoHash, double latitude, double longitude, Long registerMemberId) {
+    public CafeEntity toCafeEntity(String cafeId, String geoHash, double latitude, double longitude, Long registerMemberId) {
         return CafeEntity.builder()
-                .cafeId(this.cafeId)
+                .cafeId(cafeId)
                 .cafeName(this.cafeName)
                 .cafeDescription(this.cafeDescription)
                 .address(this.address)
@@ -33,8 +34,8 @@ public record RegisterCafeReqDto(
                 .geoHash(geoHash)
                 .registerMember(registerMemberId)
                 .build();
-
     }
+
 
 
 }
