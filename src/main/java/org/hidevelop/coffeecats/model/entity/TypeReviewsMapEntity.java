@@ -1,18 +1,13 @@
 package org.hidevelop.coffeecats.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hidevelop.coffeecats.model.entity.id.TypeReviewsMapId;
 
+@Getter
 @Entity
 @IdClass(TypeReviewsMapId.class)
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TypeReviewsMapEntity {
 
     @Id
@@ -24,4 +19,9 @@ public class TypeReviewsMapEntity {
     @ManyToOne
     @JoinColumn(name = "member_cafe_type_reviews_id", nullable = false)
     private MemberCafeTypeReviewsEntity memberCafeTypeReviewsEntity;
+
+    public TypeReviewsMapEntity(CafeTypeEntity cafeTypeEntity, MemberCafeTypeReviewsEntity reviewsEntity){
+        this.cafeTypeEntity = cafeTypeEntity;
+        this.memberCafeTypeReviewsEntity = reviewsEntity;
+    }
 }
