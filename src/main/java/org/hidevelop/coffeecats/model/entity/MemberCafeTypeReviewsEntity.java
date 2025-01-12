@@ -22,4 +22,9 @@ public class MemberCafeTypeReviewsEntity {
     @ManyToOne
     @JoinColumn(name = "cafe_id", nullable = false)
     private CafeEntity cafeEntity;
+
+    public MemberCafeTypeReviewsEntity(MemberEntity memberEntity, CafeEntity cafeEntity) {
+        this.memberEntity = memberEntity;
+        this.cafeEntity = cafeEntity;
+    }
 }
