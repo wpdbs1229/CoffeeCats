@@ -31,4 +31,12 @@ public class CafeTypeMapEntity extends BaseEntity {
         this.typeReviewCount = 1;
     }
 
+    public void decreaseTypeReviewCount(){
+        this.typeReviewCount--;
+    }
+
+    public void increaseTypeReviewCount(){
+        this.typeReviewCount++;
+    }
+
 }
