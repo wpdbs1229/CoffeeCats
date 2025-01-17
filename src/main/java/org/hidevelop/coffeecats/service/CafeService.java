@@ -4,6 +4,7 @@ import com.github.davidmoten.geo.GeoHash;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.hidevelop.coffeecats.exception.CustomException;
+import org.hidevelop.coffeecats.model.dto.CafeDescriptionUpdateReqDto;
 import org.hidevelop.coffeecats.model.dto.CafeTypeReviewsUpdateReqDto;
 import org.hidevelop.coffeecats.model.dto.RegisterCafeReqDto;
 import org.hidevelop.coffeecats.model.entity.*;
@@ -225,5 +226,24 @@ public class CafeService {
         cafeTypeMapRepository.saveAll(updateCafeTypeMapEntities);
     }
 
+    /***
+     * 카페 설명을 수정하는 메소드 (해당 카페를 등록한 사람만이 카페를 수정할 수 있습니다.)
+     * @param memberId 카페 설명을 수정할려는 유저 ID
+     * @param cafeId 카페 설명을 수정 당하는 카페 ID
+     * @param cafeDescriptionUpdateReqDto 수정할 카페 설명
+     */
+    public void updateCafeDescription(Long memberId, String cafeId, CafeDescriptionUpdateReqDto cafeDescriptionUpdateReqDto) {
+
+        CafeEntity cafeEntity = cafeRepository.findById(cafeId)
+                .orElseThrow(() -> new CustomException(DOES_NOT_EXIST_CAFE));
+
+        if(!Objects.equals(cafeEntity.getRegisterMember(), memberId)){
+            throw new CustomException(NOT_AUTHORIZED_TO_EDIT_CAFE);
+        }
+
+        cafeEntity.updateCafeDescription(cafeDescriptionUpdateReqDto.cafeDescription());
+        cafeRepository.save(cafeEntity);
+
+    }
 }
 
