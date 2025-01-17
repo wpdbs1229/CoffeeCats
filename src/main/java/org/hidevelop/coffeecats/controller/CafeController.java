@@ -5,6 +5,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.hidevelop.coffeecats.annotation.JwtAuth;
 import org.hidevelop.coffeecats.client.GooglePlaceClient;
+import org.hidevelop.coffeecats.model.dto.CafeDescriptionUpdateReqDto;
+import org.hidevelop.coffeecats.model.dto.CafeTypeReviewsUpdateReqDto;
+import org.hidevelop.coffeecats.model.dto.CommonResponseDto;
 import org.hidevelop.coffeecats.model.dto.google_map.*;
 import org.hidevelop.coffeecats.model.dto.RegisterCafeReqDto;
 import org.hidevelop.coffeecats.service.CafeService;
@@ -70,5 +73,31 @@ public class CafeController {
             return ResponseEntity.ok("검색결과가 없습니다.");
         }
         return ResponseEntity.ok(googlePlaceResponseDto);
+    }
+
+    @JwtAuth
+    @PutMapping("/{cafe-id}/cafe-type")
+    public ResponseEntity<CommonResponseDto> updateCafeType(
+            @PathVariable(name = "cafe-id") String cafeId,
+            @Valid @RequestBody CafeTypeReviewsUpdateReqDto cafeTypeReviewsUpdateReqDto,
+            HttpServletRequest request){
+
+        Long memberId = (Long) request.getAttribute("memberId");
+        cafeService.updateCafeType(memberId, cafeId, cafeTypeReviewsUpdateReqDto);
+
+        return ResponseEntity.ok(new CommonResponseDto("카페 수정을 성공하였습니다."));
+    }
+
+    @JwtAuth
+    @PutMapping("/{cafe-id}/cafe-description")
+    public ResponseEntity<CommonResponseDto> updateCafeDescription(
+            @PathVariable(name = "cafe-id") String cafeId,
+            @Valid @RequestBody CafeDescriptionUpdateReqDto cafeDescriptionUpdateReqDto,
+            HttpServletRequest request
+    ){
+
+        Long memberId = (Long) request.getAttribute("memberId");
+        cafeService.updateCafeDescription(memberId, cafeId, cafeDescriptionUpdateReqDto);
+        return ResponseEntity.ok(new CommonResponseDto("카페 수정을 성공하였습니다."));
     }
 }

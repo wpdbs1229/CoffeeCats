@@ -3,7 +3,6 @@ package org.hidevelop.coffeecats.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
-import java.util.UUID;
 
 @Entity
 @Table(name = "cafe")
@@ -38,4 +37,8 @@ public class CafeEntity extends BaseEntity {
 
     @Comment("카페를 등록한 유저")
     private Long registerMember;
+
+    public void updateCafeDescription(String cafeDescription) {
+        this.cafeDescription = cafeDescription;
+    }
 }

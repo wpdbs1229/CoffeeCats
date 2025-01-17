@@ -17,7 +17,7 @@ public class TypeReviewsMapEntity {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "member_cafe_type_reviews_id", nullable = false)
+    @JoinColumn(name = "member_cafe_type_review_id", nullable = false)
     private MemberCafeTypeReviewsEntity memberCafeTypeReviewsEntity;
 
     public TypeReviewsMapEntity(CafeTypeEntity cafeTypeEntity, MemberCafeTypeReviewsEntity reviewsEntity){
