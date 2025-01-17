@@ -38,4 +38,8 @@ public class CafeEntity extends BaseEntity {
 
     @Comment("카페를 등록한 유저")
     private Long registerMember;
+
+    public void updateCafeDescription(String cafeDescription) {
+        this.cafeDescription = cafeDescription;
+    }
 }
