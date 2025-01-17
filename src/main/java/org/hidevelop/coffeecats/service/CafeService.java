@@ -129,7 +129,6 @@ public class CafeService {
      * @param memberId 리뷰를 수정할려는 유저 PK
      * @param cafeId 리뷰를 수정할려는 Cafe PK
      * @param cafeTypeReviewsUpdateReqDto 수정할려는 새로운 카페타입 List
-     * @return
      */
     @Transactional
     public void updateCafeType(Long memberId, String cafeId, CafeTypeReviewsUpdateReqDto cafeTypeReviewsUpdateReqDto) {

@@ -3,7 +3,6 @@ package org.hidevelop.coffeecats.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
-import java.util.UUID;
 
 @Entity
 @Table(name = "cafe")
