@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.hidevelop.coffeecats.annotation.JwtAuth;
 import org.hidevelop.coffeecats.client.GooglePlaceClient;
+import org.hidevelop.coffeecats.model.dto.CafeDescriptionUpdateReqDto;
 import org.hidevelop.coffeecats.model.dto.CafeTypeReviewsUpdateReqDto;
 import org.hidevelop.coffeecats.model.dto.CommonResponseDto;
 import org.hidevelop.coffeecats.model.dto.google_map.*;
@@ -87,4 +88,16 @@ public class CafeController {
         return ResponseEntity.ok(new CommonResponseDto("카페 수정을 성공하였습니다."));
     }
 
+    @JwtAuth
+    @PutMapping("/{cafe-id}/cafe-description")
+    public ResponseEntity<CommonResponseDto> updateCafeDescription(
+            @PathVariable(name = "cafe-id") String cafeId,
+            @Valid @RequestBody CafeDescriptionUpdateReqDto cafeDescriptionUpdateReqDto,
+            HttpServletRequest request
+    ){
+
+        Long memberId = (Long) request.getAttribute("memberId");
+        cafeService.updateCafeDescription(memberId, cafeId, cafeDescriptionUpdateReqDto);
+        return ResponseEntity.ok(new CommonResponseDto("카페 수정을 성공하였습니다."));
+    }
 }
